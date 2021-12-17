@@ -1,0 +1,17 @@
+{
+  "name": "holla-api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "benidevo",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "global": "^4.4.0",
+    "mongoose": "^6.1.2",
+    "nodemon": "^2.0.15"
+  }
+}

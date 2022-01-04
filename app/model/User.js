@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
+const Profile = require('../model/Profile');
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
@@ -35,9 +40,20 @@ const UserSchema = new Schema({
     }
 });
 
+// create profile after user is created
+UserSchema.post('save', async function (doc, next) {
+    const profile = await Profile.findOne({ user: doc._id });
+    if (!profile) {
+        const newProfile = new Profile({
+            user: doc._id
+        });
 
-hdja;
+        await newProfile.save();
+        doc.profile = newProfile._id;
+        await doc.save();
+        next();
+    }
+    next();
+});
 
 module.exports = mongoose.model('User', UserSchema);
-
-

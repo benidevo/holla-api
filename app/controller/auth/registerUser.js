@@ -11,7 +11,7 @@ exports.registerUser = async function (req, res) {
             errors: errors.array()
         });
     }
-    const { email, password } = req.body;
+    const { email, password, name } = req.body;
     //  hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -19,6 +19,7 @@ exports.registerUser = async function (req, res) {
 
     const user = new User({
         email,
+        name,
         password: hashedPassword,
         otp
     });
@@ -32,12 +33,17 @@ exports.registerUser = async function (req, res) {
                 errors: [{ msg: 'User already exists' }]
             });
         }
-        res.status(500).json({ msg: 'Internal server error' });
+        return res.status(500).json({ msg: 'Internal server error' });
     }
 
     // send verification email
     const subject = 'Verify your account';
-    const text = `Hi,\n\nPlease verify your account by clicking the link below.\n\nhttp://localhost:8000/api/v1/auth/verify?otp=${otp}&id=${user._id}`;
+    const text = `Hello ${
+        user.name.split(' ')[0]
+    },\n\nPlease verify your account by clicking the link below.\n\nhttp://localhost:8000/api/v1/auth/verify?otp=${otp}&id=${
+        user._id
+    }`;
     await sendMail(email, subject, text);
+
     res.status(201).json({ msg: 'Registration Successful' });
 };

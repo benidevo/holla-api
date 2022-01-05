@@ -18,6 +18,20 @@ exports.registrationValidation = [
 ];
 
 exports.changePasswordValidation = [
-    check('password', 'Password must be at least 6 characters').isString().isLength({ min: 6 }),
-    check('newPassword', 'Password must be at least 6 characters').isString().isLength({ min: 6 })
+    check('password', 'Password must be at least 6 characters')
+        .isString()
+        .isLength({ min: 6 }),
+    check('newPassword', 'Password must be at least 6 characters')
+        .isString()
+        .isLength({ min: 6 })
+];
+
+exports.emailValidation = [
+    check('email', 'Enter a valid email address').isEmail()
+];
+
+exports.passwordValidation = [
+    check('password', 'Password must be at least 6 characters')
+        .isString()
+        .isLength({ min: 6 })
 ];

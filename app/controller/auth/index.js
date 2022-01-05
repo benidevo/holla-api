@@ -1,11 +1,14 @@
 const { loginUser } = require('./loginUser');
-const { verifyUser } = require('./verifyUser');
+const { verifyUser, resendVerificationLink } = require('./verifyUser');
 const { registerUser } = require('./registerUser');
-const { changePassword } = require('./password');
+const { changePassword, forgotPassword, resetPassword } = require('./password');
 
 module.exports = {
     loginUser,
     registerUser,
     verifyUser,
-    changePassword
+    resendVerificationLink,
+    changePassword,
+    forgotPassword,
+    resetPassword
 };

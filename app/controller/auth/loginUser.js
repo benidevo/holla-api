@@ -24,9 +24,7 @@ exports.loginUser = async function (req, res) {
     }
     // return jsonwebtoken
     const payload = {
-        user: {
-            id: user.id
-        }
+        id: user.id
     };
 
     let token;

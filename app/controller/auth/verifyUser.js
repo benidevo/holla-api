@@ -13,6 +13,7 @@ exports.verifyUser = async function (req, res) {
     // activate user
     user.otp = null;
     user.isActive = true;
+    user.updatedAt = Date.now();
 
     // save user
     await user.save();

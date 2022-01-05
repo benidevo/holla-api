@@ -16,3 +16,8 @@ exports.registrationValidation = [
         min: 6
     })
 ];
+
+exports.changePasswordValidation = [
+    check('password', 'Password must be at least 6 characters').isString().isLength({ min: 6 }),
+    check('newPassword', 'Password must be at least 6 characters').isString().isLength({ min: 6 })
+];

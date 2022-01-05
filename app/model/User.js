@@ -50,8 +50,8 @@ UserSchema.post('save', async function (doc, next) {
         const newProfile = new Profile({
             user: doc._id
         });
-
         await newProfile.save();
+
         doc.profile = newProfile._id;
         await doc.save();
         next();

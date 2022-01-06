@@ -35,4 +35,14 @@ const ChannelSchema = new Schema({
     }
 });
 
+// add admin as a member of the channel after creating it
+ChannelSchema.post('save', function (doc, next) {
+    // check if admin is already a member of the channel
+    if (!doc.admin.equals(doc.members[0])) {
+        this.members.push(this.admin);
+        this.save();
+    }
+    next();
+});
+
 module.exports = mongoose.model('Channel', ChannelSchema);

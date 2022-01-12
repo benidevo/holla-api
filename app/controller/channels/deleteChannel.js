@@ -3,9 +3,14 @@ const Channel = require('../../model/Channel');
 exports.deleteChannel = async (req, res) => {
     const { channelId } = req.params;
 
+    let channel;
     try {
-        await Channel.findByIdAndDelete(channelId);
+        channel = await Channel.deleteOne({
+            _id: channelId,
+            admin: req.user.id
+        });
     } catch (err) {
+        console.error(err);
         if (err.kind === 'ObjectId') {
             return res
                 .status(404)

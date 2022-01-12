@@ -19,7 +19,10 @@ exports.updateUserProfile = async (req, res) => {
 
     if (req.file) {
         // check that provided file is an image
-        if (!req.file.originalname.endsWith('jpg')) {
+        if (
+            !req.file.originalname.endsWith('jpg') &&
+            !req.file.originalname.endsWith('jpeg')
+        ) {
             return res
                 .status(400)
                 .json({ errors: [{ msg: 'Please upload a valid jpg file' }] });

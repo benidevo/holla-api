@@ -23,6 +23,12 @@ exports.joinChannel = async (req, res) => {
         await user.save();
         res.json({ msg: 'User joined channel' });
     } catch (error) {
+        if (error.name === 'CastError') {
+            return res.status(400).json({
+                errors: [{ msg: 'Invalid channel id' }]
+            });
+        }
+
         res.status(500).json({ errors: [{ msg: 'Internal server error' }] });
     }
 };
@@ -42,10 +48,11 @@ exports.leaveChannel = async (req, res) => {
                 errors: [{ msg: 'User has not joined this channel' }]
             });
         }
+
         // set new user admin
         if (channel.admin.equals(user._id)) {
             if (channel.members.length > 1) {
-                channel.admin = channel.members[1];
+                const oldestMember = channel.members[1];
                 channel.admin = oldestMember;
 
                 channel.members.pull(user._id);
@@ -67,6 +74,11 @@ exports.leaveChannel = async (req, res) => {
         await user.save();
         res.json({ msg: 'User left channel' });
     } catch (error) {
+        if (error.name === 'CastError') {
+            return res.status(400).json({
+                errors: [{ msg: 'Invalid channel id' }]
+            });
+        }
         res.status(500).json({ errors: [{ msg: 'Internal server error' }] });
     }
 };
@@ -101,6 +113,11 @@ exports.sendMessage = async (req, res) => {
         await channel.save();
         res.json({ msg: 'Message sent' });
     } catch (error) {
+        if (error.name === 'CastError') {
+            return res.status(400).json({
+                errors: [{ msg: 'Invalid channel id' }]
+            });
+        }
         res.status(500).json({ errors: [{ msg: 'Internal server error' }] });
     }
 };

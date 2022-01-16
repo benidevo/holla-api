@@ -11,7 +11,8 @@ const {
     joinChannel,
     retrieveAllChannels,
     leaveChannel,
-    sendMessage
+    sendMessage,
+    getChannel
 } = require('../app/controller/channels');
 const auth = require('../app/middleware/auth');
 
@@ -19,6 +20,7 @@ const router = express.Router();
 
 router.post('/', [auth, createChannelValidation], createChannel);
 router.get('/', auth, retrieveAllChannels);
+router.get('/:channelId', auth, getChannel);
 router.patch('/:channelId', [auth, updateChannelValidation], updateChannel);
 router.delete('/:channelId', auth, deleteChannel);
 router.patch('/:channelId/join', auth, joinChannel);

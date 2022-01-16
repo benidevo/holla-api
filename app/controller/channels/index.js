@@ -2,7 +2,7 @@ const { createChannel } = require('./createChannel');
 const { updateChannel } = require('./updateChannel');
 const { deleteChannel } = require('./deleteChannel');
 const { joinChannel, leaveChannel, sendMessage } = require('./actions');
-const { retrieveAllChannels } = require('./retrieveAllChannels');
+const { retrieveAllChannels, getChannel } = require('./retrieveAllChannels');
 
 module.exports = {
     createChannel,
@@ -11,5 +11,6 @@ module.exports = {
     joinChannel,
     retrieveAllChannels,
     leaveChannel,
-    sendMessage
+    sendMessage,
+    getChannel
 };

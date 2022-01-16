@@ -1,7 +1,8 @@
 const express = require('express');
 const {
     createChannelValidation,
-    updateChannelValidation
+    updateChannelValidation,
+    messageValidation
 } = require('../app/middleware/channelValidation');
 const {
     createChannel,
@@ -9,7 +10,8 @@ const {
     deleteChannel,
     joinChannel,
     retrieveAllChannels,
-    leaveChannel
+    leaveChannel,
+    sendMessage
 } = require('../app/controller/channels');
 const auth = require('../app/middleware/auth');
 
@@ -21,5 +23,5 @@ router.patch('/:channelId', [auth, updateChannelValidation], updateChannel);
 router.delete('/:channelId', auth, deleteChannel);
 router.patch('/:channelId/join', auth, joinChannel);
 router.patch('/:channelId/leave', auth, leaveChannel);
-
+router.post('/:channelId/chat', [auth, messageValidation], sendMessage);
 module.exports = router;

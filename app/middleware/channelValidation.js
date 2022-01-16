@@ -11,3 +11,7 @@ exports.updateChannelValidation = [
         .optional({ checkFalsy: true })
         .isString()
 ];
+
+exports.messageValidation = [
+    check('content', 'content is required').not().isEmpty().isString()
+];

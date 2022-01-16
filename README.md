@@ -1,6 +1,13 @@
 # Holla API
 
+
+- [Live Preview](https://documenter.getpostman.com/view/15138887/UVXkmZq3)
+
+![Screenshot](hollaAPI.png?raw=true "screenshot")
+
 ## Description
+
+
 
 Holla is a social media platform that enables users to communicate with each other in different chat rooms. Typically, a user will create an account and can join and create channels (groups) in which they can chat with others. Admin privileges are automatically assigned to the creator of a channel and any other user that is designated an admin by the creator of that channel. An admin can add and remove users from a channel and can delete the channel.
 
@@ -13,6 +20,7 @@ The following technologies were used in this project:
 -   [Express](https://expressjs.com/)
 -   [MongoDB](https://www.mongodb.com/)
 -   [JSON Web Tokens](https://jwt.io/)
+-   [Heroku](https://www.heroku.com/)
 
 ## Requirements
 
